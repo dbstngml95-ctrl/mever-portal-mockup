@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mever — 메이버</title>
+<style>
+  :root {
+    color-scheme: light;
+    --color-primary-50:  #E0F8EC;
+    --color-primary-100: #B2EFD0;
+    --color-primary-200: #6BE3A4;
+    --color-primary-300: #2ED884;
+    --color-primary-400: #08CE69;
+    --color-primary-500: #03C75A;
+    --color-primary-600: #02A848;
+    --color-primary-700: #018236;
+    --color-primary-800: #015D26;
+    --color-primary-900: #003917;
+    --color-secondary-500: #222222;
+    --color-neutral-0:    #FFFFFF;
+    --color-neutral-50:   #FAFAFA;
+    --color-neutral-100:  #F5F5F5;
+    --color-neutral-200:  #F0F0F0;
+    --color-neutral-300:  #E5E5E5;
+    --color-neutral-500:  #C7C7C7;
+    --color-neutral-700:  #888888;
+    --color-neutral-800:  #555555;
+    --color-neutral-900:  #222222;
+    --color-danger-fg: #E23744;
+    --color-success-bg: #E0F8EC;
+    --color-success-fg: #03C75A;
+    --bg-base:     #FFFFFF;
+    --bg-subtle:   #F2F3F5;
+    --bg-elevated: #FFFFFF;
+    --text-primary:    #222222;
+    --text-secondary:  #555555;
+    --text-tertiary:   #888888;
+    --text-on-primary: #FFFFFF;
+    --border-default: #E5E5E5;
+    --border-subtle:  #F0F0F0;
+    --border-strong:  #C7C7C7;
+    --border-focus:   #03C75A;
+    --radius-md: 6px;
+    --radius-lg: 10px;
+    --radius-xl: 18px;
+    --radius-full: 9999px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 6px 18px rgba(0,0,0,0.08);
+    --duration-base: 200ms;
+    --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --tabbar-h: 76px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Nanum Square Neo', 'Nanum Square', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: -0.015em;
+    background: #E7E9EC;
+  }
+  [hidden] { display: none !important; }
+
+  /* =======================================================
+     PAGE 1 — 홈
+     ======================================================= */
+  .mv-app {
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--bg-subtle);
+    color: var(--text-primary);
+    padding-bottom: calc(var(--tabbar-h) + 12px);
+    position: relative;
+  }
+
+  .mv-topbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 10px; }
+  .mv-icon-btn { width: 34px; height: 34px; padding: 0; display: grid; place-items: center; color: var(--text-primary); border: 0; background: transparent; cursor: pointer; }
+
+  .mv-searchbar {
+    margin: 4px 20px 18px; padding: 15px 20px; display: flex; align-items: center; gap: 12px;
+    background: var(--bg-elevated); border-radius: var(--radius-full); box-shadow: var(--shadow-sm);
+    border: 1.5px solid var(--color-primary-500);
+  }
+  .mv-searchbar input { flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: inherit; font-size: 15px; color: var(--text-primary); }
+  .mv-searchbar input::placeholder { color: var(--text-tertiary); }
+  .mv-search-icons { display: flex; align-items: center; gap: 12px; flex: none; }
+  .mv-search-icons .divider { width: 1px; height: 16px; background: var(--border-default); }
+  .mv-search-icons button { border: 0; background: transparent; padding: 0; display: flex; cursor: pointer; }
+  .mv-cam { color: #3579E8; }
+  .mv-spark { color: var(--color-primary-500); }
+
+  .mv-hero {
+    margin: 0 20px 16px; position: relative; aspect-ratio: 952 / 528; border-radius: var(--radius-xl);
+    overflow: hidden; box-shadow: var(--shadow-md);
+  }
+  .mv-hero img { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+  .mv-stats { display: flex; gap: 12px; overflow-x: auto; padding: 0 20px 4px; margin-bottom: 18px; scrollbar-width: none; }
+  .mv-stats::-webkit-scrollbar { display: none; }
+  .mv-stat-card {
+    flex: none; width: 178px; padding: 16px 18px; background: var(--bg-elevated); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .mv-stat-head { display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--text-secondary); }
+  .mv-stat-head svg { color: var(--text-tertiary); }
+  .mv-stat-value { margin-top: 10px; font-size: 25px; font-weight: 800; line-height: 1; display: flex; align-items: center; gap: 8px; }
+  .mv-stat-value .mv-weather-icon { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 38% 38%,#FFF9B5 0 27%,#FFD43B 29% 57%,transparent 59%); flex: none; }
+  .mv-stat-change { display: inline-flex; align-items: center; gap: 2px; font-size: 12px; font-weight: 800; color: var(--color-danger-fg); }
+  .mv-stat-sub { margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--text-tertiary); }
+
+  .mv-hot {
+    margin: 0 20px 16px; padding: 15px 18px; display: flex; align-items: center; gap: 9px;
+    background: var(--bg-elevated); border-radius: var(--radius-full); box-shadow: var(--shadow-sm);
+    border: 0; width: calc(100% - 40px); cursor: pointer; text-align: left; font-family: inherit;
+  }
+  .mv-hot .mv-spark { flex: none; }
+  .mv-hot-title { font-size: 14px; font-weight: 800; white-space: nowrap; }
+  .mv-hot-sub { font-size: 12px; font-weight: 600; color: var(--text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mv-hot-chevron { margin-left: auto; flex: none; color: var(--text-tertiary); }
+
+  .mv-grid2 { margin: 0 20px; display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+  .mv-tile {
+    position: relative; aspect-ratio: 463 / 298; border-radius: var(--radius-lg); overflow: hidden;
+    box-shadow: var(--shadow-sm); border: 0; padding: 0; cursor: pointer;
+  }
+  .mv-tile img { width: 100%; height: 100%; display: block; object-fit: cover; }
+
+  .mv-tabbar {
+    position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 430px;
+    height: var(--tabbar-h); display: flex; align-items: flex-start; justify-content: space-around;
+    padding-top: 10px; background: var(--bg-elevated); border-top: 1px solid var(--border-subtle);
+    box-shadow: 0 -4px 16px rgba(0,0,0,.05);
+  }
+  .mv-tab { border: 0; background: transparent; display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--text-tertiary); font-size: 11px; font-weight: 700; cursor: pointer; }
+  .mv-tab.active { color: var(--color-primary-500); }
+
+  @media (max-width: 380px) {
+    .mv-stat-card { width: 156px; }
+  }
+
+  /* =======================================================
+     PAGE 2 — 검색결과
+     ======================================================= */
+  .sr-app { width: 100%; max-width: 430px; margin: 0 auto; min-height: 100vh; background: var(--bg-subtle); color: var(--text-primary); padding-bottom: 32px; }
+
+  .sr-searchtop { display: flex; align-items: center; gap: 10px; padding: 14px 16px 10px; background: var(--bg-elevated); }
+  .sr-back { flex: none; width: 32px; height: 32px; display: grid; place-items: center; border: 0; background: transparent; color: var(--text-primary); padding: 0; cursor: pointer; }
+  .sr-searchbar {
+    flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+    background: var(--bg-subtle); border-radius: var(--radius-full); border: 1.5px solid var(--color-primary-500);
+  }
+  .sr-searchbar svg.sr-search-ico { flex: none; color: var(--color-primary-600); }
+  .sr-searchbar input { flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font: inherit; font-size: 16px; font-weight: 700; color: var(--text-primary); }
+  .sr-searchbar .sr-clear { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 0; background: var(--border-default); color: var(--bg-elevated); display: grid; place-items: center; cursor: pointer; padding: 0; }
+
+  .sr-tabs { display: flex; justify-content: space-between; gap: 8px; overflow-x: auto; padding: 14px 18px 0; background: var(--bg-elevated); scrollbar-width: none; }
+  .sr-tabs::-webkit-scrollbar { display: none; }
+  .sr-tabitem { flex: none; padding-bottom: 10px; font-size: 14px; font-weight: 700; color: var(--text-tertiary); border-bottom: 2.5px solid transparent; white-space: nowrap; }
+  .sr-tabitem.active { color: var(--text-primary); border-color: var(--color-primary-500); font-weight: 900; }
+
+  .sr-subfilter { display: flex; align-items: center; gap: 9px; padding: 12px 18px; background: var(--bg-elevated); border-bottom: 1px solid var(--border-subtle); font-size: 12.5px; font-weight: 600; color: var(--text-tertiary); }
+  .sr-subfilter .active { color: var(--color-primary-600); font-weight: 800; }
+  .sr-subfilter .sr-divider { width: 1px; height: 11px; background: var(--border-default); }
+  .sr-filter-pill { margin-left: auto; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: var(--radius-full); border: 1px solid var(--border-default); background: var(--bg-elevated); color: var(--text-secondary); font-size: 12.5px; font-weight: 700; }
+
+  .sr-meta { padding: 14px 20px 4px; font-size: 12px; font-weight: 600; color: var(--text-tertiary); }
+  .sr-meta b { color: var(--text-primary); font-weight: 800; }
+
+  .sr-section { margin: 12px 16px 0; padding: 18px; background: var(--bg-elevated); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+  .sr-section-head { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .sr-section-head svg { color: var(--color-primary-500); flex: none; }
+  .sr-section-title { font-size: 15px; font-weight: 900; }
+  .sr-section-more { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--text-tertiary); display: flex; align-items: center; gap: 2px; }
+
+  .sr-rel-list { margin-top: 10px; display: flex; flex-direction: column; }
+  .sr-rel-row {
+    display: flex; align-items: center; gap: 12px; padding: 14px 6px; border-bottom: 1px solid var(--border-subtle);
+    text-decoration: none; color: inherit; width: 100%; background: transparent; border-left: 0; border-right: 0; border-top: 0; cursor: pointer; text-align: left; font-family: inherit;
+  }
+  .sr-rel-row:last-child { border-bottom: 0; }
+  .sr-rel-rank {
+    flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--color-primary-50); color: var(--color-primary-700);
+    display: grid; place-items: center; font-size: 12px; font-weight: 900;
+  }
+  .sr-rel-term { flex: 1; min-width: 0; font-size: 17px; font-weight: 800; color: var(--text-primary); }
+  .sr-rel-row svg.sr-rel-arrow { flex: none; color: var(--text-tertiary); }
+
+  .sr-news { margin-top: 8px; display: flex; flex-direction: column; }
+  .sr-news-row { display: flex; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--border-subtle); }
+  .sr-news-row:last-child { border-bottom: 0; }
+  .sr-news-thumb { flex: none; width: 72px; height: 72px; border-radius: var(--radius-md); overflow: hidden; }
+  .sr-news-thumb img { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .sr-news-body { flex: 1; min-width: 0; }
+  .sr-news-tag { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10px; font-weight: 800; line-height: 15px; }
+  .sr-news-tag.red   { background: #FDECEC; color: var(--color-danger-fg); }
+  .sr-news-tag.green { background: var(--color-primary-50); color: var(--color-primary-700); }
+  .sr-news-tag.gray  { background: var(--bg-subtle); color: var(--text-secondary); }
+  .sr-news-headline { margin: 6px 0 0; font-size: 13.5px; font-weight: 750; line-height: 1.42; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .sr-news-headline mark { background: none; color: var(--color-primary-700); font-weight: 900; }
+  .sr-news-src { margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--text-tertiary); }
+</style>
+</head>
+<body>
+
+<!-- =======================================================
+     PAGE 1 — 홈
+     ======================================================= -->
+<div class="mv-app" id="page-home">
+
+  <nav class="mv-topbar" aria-label="메이버 전역 탐색">
+    <button class="mv-icon-btn" type="button" aria-label="메뉴">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <button class="mv-icon-btn" type="button" aria-label="알림">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 8h18c0-1-3-1-3-8"/><path d="M10 20h4"/></svg>
+    </button>
+  </nav>
+
+  <form class="mv-searchbar" id="home-search-form">
+    <input type="search" id="home-search-input" placeholder="검색어를 입력해 주세요" aria-label="검색어" autocomplete="off" />
+    <span class="mv-search-icons">
+      <button type="button" aria-label="카메라 검색" tabindex="-1">
+        <svg class="mv-cam" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><circle cx="12" cy="13.5" r="3.3"/></svg>
+      </button>
+      <span class="divider" aria-hidden="true"></span>
+      <button type="submit" aria-label="검색">
+        <svg class="mv-spark" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.7L19.5 9.5 13.8 11.3 12 17l-1.8-5.7L4.5 9.5l5.7-1.8z"/></svg>
+      </button>
+    </span>
+  </form>
+
+  <section class="mv-hero" aria-label="추천 배너">
+    <img src="mever-assets/hero.jpg" alt="오늘, 가장 필요한 정보 — 노을 지는 한강을 바라보는 여성" />
+  </section>
+
+  <div class="mv-stats" aria-label="오늘의 정보">
+    <article class="mv-stat-card">
+      <div class="mv-stat-head">오늘의 날씨</div>
+      <div class="mv-stat-value"><span class="mv-weather-icon" aria-hidden="true"></span>25.5°</div>
+      <div class="mv-stat-sub">서울특별시</div>
+    </article>
+    <article class="mv-stat-card">
+      <div class="mv-stat-head">코스피
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+      </div>
+      <div class="mv-stat-value">1,345.60</div>
+      <div class="mv-stat-change">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l8 14H4z"/></svg>
+        0.13%
+      </div>
+    </article>
+    <article class="mv-stat-card">
+      <div class="mv-stat-head">환율</div>
+      <div class="mv-stat-value">1,384</div>
+      <div class="mv-stat-sub">미국 USD</div>
+    </article>
+  </div>
+
+  <button class="mv-hot" type="button">
+    <svg class="mv-spark" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.7L19.5 9.5 13.8 11.3 12 17l-1.8-5.7L4.5 9.5l5.7-1.8z"/></svg>
+    <span class="mv-hot-title">지금 가장 핫한 소식</span>
+    <span class="mv-hot-sub">많이 보고 있는 콘텐츠를 확인해보세요</span>
+    <svg class="mv-hot-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
+
+  <div class="mv-grid2" aria-label="추천 콘텐츠">
+    <button class="mv-tile" type="button">
+      <img src="mever-assets/tile1.jpg" alt="스포츠 — 오늘도 달리는 이유, 운동이 주는 작은 변화" />
+    </button>
+    <button class="mv-tile" type="button">
+      <img src="mever-assets/tile2.jpg" alt="라이프 — 일상 속 작은 습관, 더 나은 하루를 위한 팁" />
+    </button>
+  </div>
+
+  <nav class="mv-tabbar" aria-label="하단 탐색">
+    <button class="mv-tab active" type="button">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/></svg>
+      홈
+    </button>
+    <button class="mv-tab" type="button">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg>
+      서비스
+    </button>
+    <button class="mv-tab" type="button">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
+      검색
+    </button>
+    <button class="mv-tab" type="button">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg>
+      보관함
+    </button>
+    <button class="mv-tab" type="button">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1.2-3.6 4-5.4 7-5.4s5.8 1.8 7 5.4"/></svg>
+      마이
+    </button>
+  </nav>
+
+</div>
+
+<!-- =======================================================
+     PAGE 2 — 검색결과 ('소이준')
+     ======================================================= -->
+<div class="sr-app" id="page-search" hidden>
+
+  <div class="sr-searchtop">
+    <button class="sr-back" type="button" id="search-back-btn" aria-label="뒤로">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>
+    </button>
+    <label class="sr-searchbar">
+      <svg class="sr-search-ico" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
+      <input type="search" id="search-input" value="소이준" aria-label="검색어" />
+      <button class="sr-clear" type="button" id="search-clear-btn" aria-label="검색어 지우기">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </label>
+  </div>
+
+  <nav class="sr-tabs" aria-label="검색 결과 탭">
+    <span class="sr-tabitem">통합</span>
+    <span class="sr-tabitem active">뉴스</span>
+    <span class="sr-tabitem">이미지</span>
+    <span class="sr-tabitem">동영상</span>
+    <span class="sr-tabitem">쇼핑</span>
+    <span class="sr-tabitem">더보기</span>
+  </nav>
+
+  <div class="sr-subfilter" aria-label="뉴스 정렬 및 필터">
+    <span class="active">전체</span>
+    <span class="sr-divider" aria-hidden="true"></span>
+    <span>최신순</span>
+    <span class="sr-divider" aria-hidden="true"></span>
+    <span>언론사</span>
+    <span class="sr-divider" aria-hidden="true"></span>
+    <span>기간</span>
+    <button class="sr-filter-pill" type="button">필터
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+  </div>
+
+  <p class="sr-meta"><b>'<span id="search-query-label">소이준</span>'</b> 검색결과입니다</p>
+
+  <section class="sr-section" aria-label="연관검색어">
+    <div class="sr-section-head">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.7L19.5 9.5 13.8 11.3 12 17l-1.8-5.7L4.5 9.5l5.7-1.8z"/></svg>
+      <h2 class="sr-section-title"><span id="search-query-title">소이준</span> 연관검색어</h2>
+    </div>
+    <div class="sr-rel-list">
+      <button class="sr-rel-row" type="button">
+        <span class="sr-rel-rank">1</span>
+        <span class="sr-rel-term">셀 홀딩스</span>
+        <svg class="sr-rel-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <button class="sr-rel-row" type="button">
+        <span class="sr-rel-rank">2</span>
+        <span class="sr-rel-term">태양그룹</span>
+        <svg class="sr-rel-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <button class="sr-rel-row" type="button">
+        <span class="sr-rel-rank">3</span>
+        <span class="sr-rel-term">반쪽 도련님</span>
+        <svg class="sr-rel-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <section class="sr-section" aria-label="관련기사">
+    <div class="sr-section-head">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+      <h2 class="sr-section-title">관련기사</h2>
+      <span class="sr-section-more">더보기
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
+      </span>
+    </div>
+    <div class="sr-news">
+      <article class="sr-news-row">
+        <div class="sr-news-thumb"><img src="mever-assets/thumb1.jpg" alt="셀 홀딩스 사옥 앞에 선 의문의 인물" /></div>
+        <div class="sr-news-body">
+          <span class="sr-news-tag red">단독</span>
+          <p class="sr-news-headline">셀 홀딩스 4번째 최대주주가 된 <mark>소이준</mark>…후계구도의 신호탄?</p>
+          <div class="sr-news-src">경제 · 12분 전</div>
+        </div>
+      </article>
+      <article class="sr-news-row">
+        <div class="sr-news-thumb"><img src="mever-assets/thumb2.jpg" alt="태양그룹 저택 대문으로 들어서는 인물" /></div>
+        <div class="sr-news-body">
+          <span class="sr-news-tag green">이슈</span>
+          <p class="sr-news-headline">태양그룹 후계 구도 흔드는 '반쪽 도련님', <mark>소이준</mark>은 누구</p>
+          <div class="sr-news-src">종합 · 34분 전</div>
+        </div>
+      </article>
+      <article class="sr-news-row">
+        <div class="sr-news-thumb"><img src="mever-assets/thumb3.jpg" alt="창밖 도심을 바라보는 남성의 뒷모습" /></div>
+        <div class="sr-news-body">
+          <span class="sr-news-tag gray">화제</span>
+          <p class="sr-news-headline">베일 벗은 <mark>소이준</mark> 행보에 재계 시선 집중</p>
+          <div class="sr-news-src">산업 · 51분 전</div>
+        </div>
+      </article>
+      <article class="sr-news-row">
+        <div class="sr-news-thumb"><img src="mever-assets/thumb4.jpg" alt="플래시 세례를 받는 소이준의 포토라인 등장" /></div>
+        <div class="sr-news-body">
+          <span class="sr-news-tag gray">포토</span>
+          <p class="sr-news-headline"><mark>소이준</mark>, 공식 석상 첫 등장…화제의 인물로 떠올라</p>
+          <div class="sr-news-src">연예 · 1시간 전</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  var pageHome = document.getElementById('page-home');
+  var pageSearch = document.getElementById('page-search');
+  var homeForm = document.getElementById('home-search-form');
+  var homeInput = document.getElementById('home-search-input');
+  var searchInput = document.getElementById('search-input');
+  var queryLabel = document.getElementById('search-query-label');
+  var queryTitle = document.getElementById('search-query-title');
+  var backBtn = document.getElementById('search-back-btn');
+  var clearBtn = document.getElementById('search-clear-btn');
+
+  function goToSearch(rawQuery) {
+    var q = (rawQuery || '').trim() || '소이준';
+    searchInput.value = q;
+    queryLabel.textContent = q;
+    queryTitle.textContent = q;
+    pageHome.hidden = true;
+    pageSearch.hidden = false;
+    window.scrollTo(0, 0);
+  }
+
+  function goToHome() {
+    pageSearch.hidden = true;
+    pageHome.hidden = false;
+    homeInput.value = '';
+    window.scrollTo(0, 0);
+  }
+
+  homeForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    goToSearch(homeInput.value);
+  });
+
+  backBtn.addEventListener('click', goToHome);
+
+  clearBtn.addEventListener('click', function () {
+    searchInput.value = '';
+    searchInput.focus();
+  });
+</script>
+
+</body>
+</html>
