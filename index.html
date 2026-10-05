@@ -217,6 +217,13 @@
   .sr-news-more { margin-top: 18px; padding: 20px; width: 100%; border: 0; border-radius: 999px; background: #f5f6f8; color: #626b77; font-family: inherit; font-size: 18px; font-weight: 800; }
   .sr-news-more span { margin-left: 12px; }
 
+  .sr-bottom { background: var(--bg-subtle); padding: 16px 16px 36px; }
+  .sr-bottom-more { display: block; width: 100%; padding: 20px 16px; border: 0; border-radius: 999px; background: white; box-shadow: 0 2px 3px rgba(0,0,0,.04); color: #555; font: 800 18px inherit; font-family: inherit; font-size: 18px; font-weight: 800; cursor: pointer; }
+  .sr-bottom-more span { margin-left: 8px; color: #888; }
+  .sr-pagination { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 28px; }
+  .sr-pagination button { border: 0; padding: 4px; min-width: 23px; background: transparent; font-family: inherit; font-size: 17px; font-weight: 800; color: #888; cursor: pointer; }
+  .sr-pagination button[aria-current="page"] { color: var(--color-primary-500); }
+  .sr-pagination button[aria-label] { color: #c5c7ca; font-size: 26px; font-weight: 400; }
 </style>
 </head>
 <body>
@@ -400,7 +407,20 @@
       </article>
     </div>
   </section>
-
+  <footer class="sr-bottom">
+    <button class="sr-bottom-more" type="button">뉴스 더보기 <span aria-hidden="true">→</span></button>
+    <nav class="sr-pagination" aria-label="뉴스 페이지">
+      <button type="button" aria-label="이전 페이지" disabled>‹</button>
+      <button type="button" aria-current="page">1</button>
+      <button type="button">2</button>
+      <button type="button">3</button>
+      <button type="button">4</button>
+      <button type="button">5</button>
+      <button type="button">6</button>
+      <button type="button">7</button>
+      <button type="button" aria-label="다음 페이지">›</button>
+    </nav>
+  </footer>
 </div>
 
 <script>
