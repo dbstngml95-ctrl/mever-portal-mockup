@@ -229,6 +229,19 @@
   .sr-pagination button { border: 0; padding: 4px; min-width: 23px; background: transparent; font-family: inherit; font-size: 17px; font-weight: 800; color: #888; cursor: pointer; }
   .sr-pagination button[aria-current="page"] { color: var(--color-primary-500); }
   .sr-pagination button[aria-label] { color: #c5c7ca; font-size: 26px; font-weight: 400; }
+  .mv-shorts { margin: 10px 20px 0; padding-bottom: 8px; }
+  .mv-shorts-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .mv-shorts-head h2 { font-size: 15px; margin: 0; font-weight: 850; }
+  .mv-shorts-head h2 span { color: #aaa; font-size: 12px; font-weight: 400; }
+  .mv-shorts-head > span { font-size: 10px; color: #8b9693; }
+  .mv-shorts-list { display: flex; flex-direction: column; gap: 6px; }
+  .mv-short { background: #fff; border-radius: 13px; overflow: hidden; }
+  .mv-short summary { display: flex; align-items: center; gap: 9px; padding: 10px 12px; cursor: pointer; list-style: none; font-size: 12px; font-weight: 750; }
+  .mv-short summary::-webkit-details-marker { display: none; }
+  .mv-short summary svg { width: 17px; height: 17px; color: var(--color-primary-500); flex: none; }
+  .mv-short summary i { margin-left: auto; color: #999; font-style: normal; }
+  .mv-short[open] summary i { transform: rotate(180deg); }
+  .mv-short p { margin: 0; padding: 0 12px 12px 38px; color: #73807b; font-size: 11px; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -302,6 +315,14 @@
       <img src="mever-assets/tile2.jpg" alt="라이프 — 일상 속 작은 습관, 더 나은 하루를 위한 팁" />
     </button>
   </div>
+
+  <section class="mv-shorts" aria-label="숏텐츠">
+    <div class="mv-shorts-head"><h2>숏텐츠 <span aria-hidden="true">ⓘ</span></h2><span>일상 속 작은 발견</span></div>
+    <div class="mv-shorts-list">
+      <details class="mv-short"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><span>창가에서 찾은 작은 쉼</span><i aria-hidden="true">⌄</i></summary><p>햇살이 머무는 창가, 잠시 쉬어가는 오후의 풍경.</p></details>
+      <details class="mv-short"><summary><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><span>나만의 책상 꾸미기</span><i aria-hidden="true">⌄</i></summary><p>작은 화분과 좋아하는 색으로 만드는 나만의 공간.</p></details>
+    </div>
+  </section>
 
   <nav class="mv-tabbar" aria-label="하단 탐색">
     <button class="mv-tab active" type="button">
