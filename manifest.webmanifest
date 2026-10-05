@@ -1,0 +1,10 @@
+{
+  "name": "메이버",
+  "short_name": "메이버",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F2F3F5",
+  "theme_color": "#F2F3F5",
+  "lang": "ko"
+}
