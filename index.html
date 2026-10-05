@@ -194,6 +194,27 @@
   .sr-news-headline { margin: 6px 0 0; font-size: 13.5px; font-weight: 750; line-height: 1.42; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
   .sr-news-headline mark { background: none; color: var(--color-primary-700); font-weight: 900; }
   .sr-news-src { margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--text-tertiary); }
+
+  /* Search result layout */
+  .sr-subfilter, .sr-meta { display: none; }
+  .sr-rel-list { gap: clamp(8px, 2.5vw, 14px); justify-content: space-between; }
+  .sr-rel-term { font-size: clamp(11px, 3.1vw, 13px); letter-spacing: -.04em; }
+  .sr-section[aria-label="관련기사"] .sr-section-head { padding-bottom: 14px; border-bottom: 1px solid #dfe3e8; }
+  .sr-section[aria-label="관련기사"] .sr-section-head > svg { display: none; }
+  .sr-section[aria-label="관련기사"] .sr-section-title { margin: 0; font-size: 21px; }
+  .sr-news { margin: 0; }
+  .sr-news-row { padding: 22px 0; gap: 12px; border-bottom: 1px solid #e2e5e9; }
+  .sr-news-row:last-child { border-bottom: 1px solid #e2e5e9; }
+  .sr-news-thumb { width: 28%; height: auto; aspect-ratio: 1.32; border-radius: 12px; }
+  .sr-publisher { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; font-size: 11px; }
+  .sr-publisher-badge { width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%; color: white; font-weight: 800; flex: none; }
+  .sr-publisher time { margin-left: auto; color: #94a3b8; font-size: 9px; white-space: nowrap; }
+  .sr-news-headline { font-size: 15px; line-height: 1.5; margin: 0; }
+  .sr-news-headline mark { color: inherit; }
+  .sr-news-summary { margin: 9px 0 0; font-size: 12px; line-height: 1.65; color: #788391; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .sr-news-more { margin-top: 18px; padding: 20px; width: 100%; border: 0; border-radius: 999px; background: #f5f6f8; color: #626b77; font-family: inherit; font-size: 18px; font-weight: 800; }
+  .sr-news-more span { margin-left: 12px; }
+
 </style>
 </head>
 <body>
@@ -312,8 +333,8 @@
   </div>
 
   <nav class="sr-tabs" aria-label="검색 결과 탭">
-    <span class="sr-tabitem">통합</span>
-    <span class="sr-tabitem active">뉴스</span>
+    <span class="sr-tabitem active">통합</span>
+    <span class="sr-tabitem">뉴스</span>
     <span class="sr-tabitem">이미지</span>
     <span class="sr-tabitem">동영상</span>
     <span class="sr-tabitem">쇼핑</span>
@@ -341,29 +362,19 @@
       <h2 class="sr-section-title">연관검색어<span id="search-query-title" hidden>소이준</span></h2>
     </div>
     <div class="sr-rel-list">
-      <button class="sr-rel-row" type="button">
-        <span class="sr-rel-rank">1</span>
-        <span class="sr-rel-term">셀 홀딩스</span>
-        <svg class="sr-rel-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-      </button>
-      <button class="sr-rel-row" type="button">
-        <span class="sr-rel-rank">2</span>
-        <span class="sr-rel-term">태양그룹</span>
-        <svg class="sr-rel-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-      </button>
-      <button class="sr-rel-row" type="button">
-        <span class="sr-rel-rank">3</span>
-        <span class="sr-rel-term">반쪽 도련님</span>
-        <svg class="sr-rel-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-      </button>
+      <button class="sr-rel-row" type="button"><span class="sr-rel-term">셀 홀딩스</span></button>
+      <button class="sr-rel-row" type="button"><span class="sr-rel-term">태한그룹</span></button>
+      <button class="sr-rel-row" type="button"><span class="sr-rel-term">반쪽도련님</span></button>
+      <button class="sr-rel-row" type="button"><span class="sr-rel-term">원설아회장</span></button>
+      <button class="sr-rel-row" type="button"><span class="sr-rel-term">소현식</span></button>
     </div>
   </section>
 
   <section class="sr-section" aria-label="관련기사">
     <div class="sr-section-head">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
-      <h2 class="sr-section-title">관련기사</h2>
-      <span class="sr-section-more">더보기
+      <h2 class="sr-section-title">뉴스</h2>
+      <span class="sr-section-more">뉴스 더보기
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
       </span>
     </div>
@@ -371,36 +382,37 @@
       <article class="sr-news-row">
         <div class="sr-news-thumb"><img src="mever-assets/thumb1.jpg" alt="셀 홀딩스 사옥 앞에 선 의문의 인물" /></div>
         <div class="sr-news-body">
-          <span class="sr-news-tag red">단독</span>
+          <div class="sr-publisher"><span class="sr-publisher-badge" style="background:#1c3354">V</span><b>THE VALUEWIRE</b><time>2027. 10. 02.</time></div>
           <p class="sr-news-headline">셀 홀딩스 4번째 최대주주가 된 <mark>소이준</mark>…후계구도의 신호탄?</p>
-          <div class="sr-news-src">경제 · 12분 전</div>
+          <p class="sr-news-summary">셀 홀딩스의 주요 주주로 이름을 올린 소이준. 그의 등장과 함께 향후 경영 행보와 후계 구도에 재계의 관심이 모이고 있다.</p>
         </div>
       </article>
       <article class="sr-news-row">
         <div class="sr-news-thumb"><img src="mever-assets/thumb2.jpg" alt="태양그룹 저택 대문으로 들어서는 인물" /></div>
         <div class="sr-news-body">
-          <span class="sr-news-tag green">이슈</span>
+          <div class="sr-publisher"><span class="sr-publisher-badge" style="background:#ae4857">N</span><b>ISSUE:N</b><time>2027. 10. 02.</time></div>
           <p class="sr-news-headline">셀 홀딩스 후계 구도 흔드는 '반쪽 도련님', <mark>소이준</mark>은 누구</p>
-          <div class="sr-news-src">종합 · 34분 전</div>
+          <p class="sr-news-summary">셀 홀딩스 후계자로 거론되는 소이준을 향한 관심이 커지고 있다. 그동안 베일에 싸여 있던 그의 가족사와 행보가 다시 주목받고 있다.</p>
         </div>
       </article>
       <article class="sr-news-row">
         <div class="sr-news-thumb"><img src="mever-assets/thumb3.jpg" alt="창밖 도심을 바라보는 남성의 뒷모습" /></div>
         <div class="sr-news-body">
-          <span class="sr-news-tag gray">화제</span>
+          <div class="sr-publisher"><span class="sr-publisher-badge" style="background:#202a33">정</span><b>정우일보</b><time>2027. 10. 02.</time></div>
           <p class="sr-news-headline">베일 벗은 <mark>소이준</mark> 행보에 재계 시선 집중</p>
-          <div class="sr-news-src">산업 · 51분 전</div>
+          <p class="sr-news-summary">소이준의 모습이 공개되면서 그의 일상에도 관심이 쏠리고 있다. 최근 온라인 커뮤니티에서는 그를 둘러싼 이야기가 이어지고 있다.</p>
         </div>
       </article>
       <article class="sr-news-row">
         <div class="sr-news-thumb"><img src="mever-assets/thumb4.jpg" alt="플래시 세례를 받는 소이준의 포토라인 등장" /></div>
         <div class="sr-news-body">
-          <span class="sr-news-tag gray">포토</span>
+          <div class="sr-publisher"><span class="sr-publisher-badge" style="background:#03a854">M</span><b>메이버뉴스</b><time>2027. 10. 02.</time></div>
           <p class="sr-news-headline"><mark>소이준</mark>, 공식 석상 첫 등장…화제의 인물로 떠올라</p>
-          <div class="sr-news-src">연예 · 1시간 전</div>
+          <p class="sr-news-summary">공식 석상에 모습을 드러낸 소이준에게 취재진의 시선이 집중됐다. 셀 홀딩스의 향후 행보에도 관심이 이어지고 있다.</p>
         </div>
       </article>
     </div>
+    <button class="sr-news-more" type="button">뉴스 더보기 <span>➜</span></button>
   </section>
 
 </div>
