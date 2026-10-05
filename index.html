@@ -429,6 +429,19 @@
 </div>
 
 <script>
+  // Fullscreen requires a user gesture on supported Android browsers.
+  function enterFullscreenOnFirstTouch() {
+    if (document.fullscreenElement || document.webkitFullscreenElement) return;
+    var root = document.documentElement;
+    var request = root.requestFullscreen || root.webkitRequestFullscreen;
+    if (!request) return;
+    try {
+      var result = request.call(root);
+      if (result && result.catch) result.catch(function () {});
+    } catch (error) {}
+  }
+  document.addEventListener('pointerdown', enterFullscreenOnFirstTouch, { once: true });
+
   var pageHome = document.getElementById('page-home');
   var pageSearch = document.getElementById('page-search');
   var homeForm = document.getElementById('home-search-form');

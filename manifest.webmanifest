@@ -3,8 +3,12 @@
   "short_name": "메이버",
   "start_url": "./",
   "scope": "./",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#F2F3F5",
   "theme_color": "#F2F3F5",
-  "lang": "ko"
+  "lang": "ko",
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ]
 }
