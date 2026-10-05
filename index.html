@@ -197,8 +197,10 @@
 
   /* Search result layout */
   .sr-subfilter, .sr-meta { display: none; }
-  .sr-rel-list { gap: clamp(8px, 2.5vw, 14px); justify-content: space-between; }
-  .sr-rel-term { font-size: clamp(11px, 3.1vw, 13px); letter-spacing: -.04em; }
+  .sr-rel-list { gap: 16px; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+  .sr-rel-term { font-size: 14px; letter-spacing: -.02em; }
+  .sr-rel-row { flex: none; }
+  .sr-rel-list::-webkit-scrollbar { display: none; }
   .sr-section[aria-label="관련기사"] .sr-section-head { padding-bottom: 14px; border-bottom: 1px solid #dfe3e8; }
   .sr-section[aria-label="관련기사"] .sr-section-head > svg { display: none; }
   .sr-section[aria-label="관련기사"] .sr-section-title { margin: 0; font-size: 21px; }
@@ -371,13 +373,6 @@
   </section>
 
   <section class="sr-section" aria-label="관련기사">
-    <div class="sr-section-head">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a1 1 0 0 1-1 1H6a2 2 0 0 1-2-2z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
-      <h2 class="sr-section-title">뉴스</h2>
-      <span class="sr-section-more">뉴스 더보기
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>
-      </span>
-    </div>
     <div class="sr-news">
       <article class="sr-news-row">
         <div class="sr-news-thumb"><img src="mever-assets/thumb1.jpg" alt="셀 홀딩스 사옥 앞에 선 의문의 인물" /></div>
@@ -404,7 +399,6 @@
         </div>
       </article>
     </div>
-    <button class="sr-news-more" type="button">뉴스 더보기 <span>➜</span></button>
   </section>
 
 </div>
