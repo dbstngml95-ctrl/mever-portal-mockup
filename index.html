@@ -429,18 +429,40 @@
 </div>
 
 <script>
-  // Fullscreen requires a user gesture on supported Android browsers.
+  var fullscreenPending = false;
+  var fullscreenCompleted = false;
   function enterFullscreenOnFirstTouch() {
-    if (document.fullscreenElement || document.webkitFullscreenElement) return;
+    if (fullscreenPending || fullscreenCompleted) return;
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+      fullscreenCompleted = true;
+      return;
+    }
     var root = document.documentElement;
     var request = root.requestFullscreen || root.webkitRequestFullscreen;
     if (!request) return;
+    fullscreenPending = true;
     try {
       var result = request.call(root);
-      if (result && result.catch) result.catch(function () {});
-    } catch (error) {}
+      if (result && result.then) {
+        result.then(function () {
+          fullscreenPending = false;
+          fullscreenCompleted = true;
+        }).catch(function () {
+          fullscreenPending = false;
+        });
+      } else {
+        fullscreenPending = false;
+      }
+    } catch (error) {
+      fullscreenPending = false;
+    }
   }
-  document.addEventListener('pointerdown', enterFullscreenOnFirstTouch, { once: true });
+  document.addEventListener('pointerup', enterFullscreenOnFirstTouch, { capture: true });
+  document.addEventListener('touchend', enterFullscreenOnFirstTouch, { capture: true, passive: true });
+  document.addEventListener('click', enterFullscreenOnFirstTouch, { capture: true });
+  document.addEventListener('webkitfullscreenchange', function () {
+    if (document.webkitFullscreenElement) fullscreenCompleted = true;
+  });
 
   var pageHome = document.getElementById('page-home');
   var pageSearch = document.getElementById('page-search');
